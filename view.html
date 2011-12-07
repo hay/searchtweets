@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <title>Tweet Viewer</title>
+    <style>
+    th {
+    font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,
+    sans-serif;
+    color: #6D929B;
+    border-right: 1px solid #C1DAD7;
+    border-bottom: 1px solid #C1DAD7;
+    border-top: 1px solid #C1DAD7;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 6px 6px 6px 12px;
+    background: #CAE8EA url(images/bg_header.jpg) no-repeat;
+}
+td {
+    border-right: 1px solid #C1DAD7;
+    border-bottom: 1px solid #C1DAD7;
+    background: #fff;
+    padding: 6px 6px 6px 12px;
+    color: #6D929B;
+}
+</style>
+</head>
+<body>
+    <table>
+        <thead><tr></tr></thead>
+        <tbody></tbody>
+        <tfoot><tr></tr></tfoot>
+    </table>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script>
+        $.getJSON("tweets.json", function(tweets) {
+            // Create header
+            $.each(tweets[0], function(key, val) {
+                $("thead tr, tfoot tr").append('<th>' + key + '</th>');
+            });
+
+            $.each(tweets, function() {
+                var $tr = $("<tr></tr>");
+
+                $.each(this, function(key, val) {
+                    $tr.append('<td>' + val + '</td>');
+                });
+
+                $("tbody").append($tr);
+            });
+        })
+    </script>
+</body>
+</html>
